@@ -1,0 +1,523 @@
+.body{
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: center;  /*左右布局---居中对齐*/
+}
+
+
+
+
+
+/*
+ * 头部
+ */
+
+.top{
+    /*border: 1px solid red;*/
+    width: 1300px;
+    display: flex;
+    justify-content: center;  /*左右布局---居中对齐*/
+}
+
+
+/*头部居中*/
+.top > div{
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: space-between;/*两端对齐*/
+    width: 1000px;
+}
+
+.top > div > div{
+    /*border: 1px solid red;*/
+}
+
+/*头部第一个框*/
+.top > div > div:nth-child(1){
+    /*background-image: url("../img/logo_cu9u.png");*/
+    /*background-size: 100% 100%;*/
+    /*width: 200px;*/
+    /*height: 35px;*/
+}
+
+/*头部第二个框*/
+.top > div > div:nth-child(2){
+    display: flex;
+    justify-content: center;  /*左右布局---居中对齐*/
+}
+
+.top > div > div:nth-child(2) > div> a{
+    text-decoration: none;
+    color: #A55500;
+}
+
+.top > div > div:nth-child(2) > div{
+    /*border: 1px solid green;*/
+    font-size: 13px;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 20px;
+}
+
+.top > div > div:nth-child(2) > div:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top > div > div:nth-child(2) > div:nth-child(4){
+    color: red;
+    font-weight: bold;
+}
+
+/*头部第三个框*/
+.top > div > div:nth-child(3){
+    font-size: 13px;
+    height: 35px;
+    line-height: 35px;
+}
+
+
+
+
+/*
+ * 中部
+ */
+.middle{
+    /*border: 1px solid green;*/
+}
+
+.middle > div{
+    /*border: 1px solid red;*/
+}
+
+.middle > div:nth-child(1){
+    background-image: url("../img/banner_g6ii.jpg");
+    background-size: 100% 100%;
+    width: 1300px;
+    height: calc(1300px*650/1920);
+    display: flex;
+    justify-content: center;  /*左右布局---居中对齐*/
+    align-items: center;/*上下居中*/
+}
+
+.middle > div:nth-child(1) > div{
+    /*border: 1px solid green;*/
+    width: 1000px;
+    /*height: 250px;*/
+    display: flex;
+    align-items: center;/*上下居中*/
+}
+
+.middle > div:nth-child(1) > div > div{
+    /*border: 1px solid red;*/
+    width: 500px;
+    /*height: 210px;*/
+}
+
+.middle > div:nth-child(1) > div > div >div{
+    /*border: 1px solid fuchsia;*/
+}
+
+.middle > div:nth-child(1) > div > div >div >div{
+    /*border: 1px solid red;*/
+    text-align: right;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(1){
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    color: rgb(170, 170, 170);
+    line-height: 140%;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(2){
+    font-size: 24px;
+    font-family: Microsoft YaHei;
+    color: rgb(51, 51, 51);
+    line-height: 140%;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(3){
+    font-size: 36px;
+    font-family: Microsoft YaHei;
+    color: rgb(246, 190, 35);
+    line-height: 140%;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(4){
+    font-size: 13px;
+    font-family: Microsoft YaHei;
+    color: rgb(136, 136, 136);
+    line-height: 140%;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(5){
+    font-size: 13px;
+    font-family: Microsoft YaHei;
+    color: rgb(136, 136, 136);
+    line-height: 140%;
+}
+
+.middle-a{
+    margin-top: 18px;
+    display: flex;
+    justify-content: flex-end;/*居右对齐*/
+}
+
+.middle-a > div > a{
+    display: block;
+    text-decoration: none;
+    width: 145px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0px;
+    background-color: rgba(246,190,35,1);
+}
+
+.middle-a > div > a > span{
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
+}
+
+
+
+/*第二个框*/
+.middle-four{
+    display: flex;
+    justify-content: center;/*左右居中*/
+}
+
+.middle-four > div{
+    /*border: 1px solid red;*/
+    width: 1100px;
+    /*height: 500px;*/
+    margin-top: 30px;
+}
+
+.middle-four > div>div:nth-child(1) {
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: space-between;/*两端对齐*/
+}
+
+.middle-four > div >div>div{
+    /*border: 1px solid red;*/
+}
+
+.middle-four > div >div:nth-child(1)>div:nth-child(1){
+    display: flex;
+    justify-content: flex-start;/*居左对齐*/
+    align-items: center;
+}
+
+.middle-four > div >div:nth-child(1)>div:nth-child(1)>div{
+    /*border: 1px solid green;*/
+}
+
+.middle-four > div >div:nth-child(1)>div:nth-child(1)>div:nth-child(1){
+    background-image: url("../img/bt_bg_dby3.jpg");
+    background-size: 100% 100%;
+    width: 3px;
+    height: 18px;
+}
+
+.middle-four > div >div:nth-child(1)>div:nth-child(1)>div:nth-child(2){
+    padding: 0px 10px;
+    height: 18px;
+    line-height: 18px;
+}
+
+.middle-four > div >div:nth-child(1)>div:nth-child(1)>div:nth-child(2)>span:nth-child(1){
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    color: rgb(0, 0, 0);
+}
+
+.middle-four > div >div:nth-child(1)>div:nth-child(1)>div:nth-child(2)>span:nth-child(2){
+    font-size: 10px;
+    font-family: Microsoft YaHei;
+    color: #aaaaaa;
+}
+
+.nav{
+    display: flex;
+    justify-content: flex-start;/*居左对齐*/
+}
+
+.nav>div{
+    /*border: 1px solid red;*/
+}
+
+.nav>div{
+    text-align: center;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 13px;
+    font-family: Microsoft YaHei;
+    width: 98px;
+    height: 18px;
+    line-height: 18px;
+}
+
+.nav>div:hover{
+    background-color: red;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.nav>div:nth-child(1){
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+.nav>div>a{
+    text-decoration: none;
+    color: #333333;
+}
+
+
+/*商品展示*/
+.middle-four>div>div:nth-child(2){
+    margin-top: 20px;
+    /*border: 1px solid green;*/
+}
+
+
+/*商品展示第一行*/
+/*商品展示1*/
+.product-one{
+    display: flex;
+    justify-content: flex-start;/*居左对齐*/
+    flex-wrap: wrap;/*自动换行*/
+}
+
+.product-one > div{
+    /*border: 1px solid green;*/
+    width: 160px;
+    margin-left: 15px;
+}
+
+.product-one > div:nth-child(1) >div:nth-child(1){
+    /*background-image: url("../img/mark_wsxavm6c(1)_h322.jpg");*/
+    background-size: 100% 100%;
+    width: 160px;
+    height: 160px;
+}
+
+.product-one > div >div:nth-child(2)>div{
+    /*border: 1px solid red;*/
+}
+
+.product-one > div >div:nth-child(2)>div:nth-child(1){
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 140%;
+}
+
+.product-one > div >div:nth-child(2)>div:nth-child(1)>a{
+    text-decoration: none;
+    font-family: Microsoft YaHei;
+    color: #333333;
+}
+.product-one > div >div:nth-child(2)>div:nth-child(1):hover{
+    cursor: pointer;
+}
+
+.product-one > div >div:nth-child(2)>div:nth-child(2){
+    font-size: 13px;
+    color: #666;
+}
+
+.product-one > div >div:nth-child(2)>div:nth-child(2)>span{
+    text-decoration: line-through;
+    color: #666;
+}
+
+.product-one > div >div:nth-child(2)>div:nth-child(3){
+    font-size: 13px;
+    font-family: Microsoft YaHei;
+}
+.product-one > div >div:nth-child(2)>div:nth-child(3)>span{
+    font-size: 15px;
+    color: red;
+}
+
+/*商品展示2*/
+.product-one > div:nth-child(2) >div:nth-child(1){
+    /*background-image: url("../img/mark_m2oxpk3u(6)_vn1u.jpg");*/
+    background-size: 100% 100%;
+    width: 160px;
+    height: 160px;
+}
+
+/*商品展示3*/
+.product-one > div:nth-child(3) >div:nth-child(1){
+    /*background-image: url("../img/mark_ly8invlw_3r31.jpg");*/
+    background-size: 100% 100%;
+    width: 160px;
+    height: 160px;
+}
+
+/*商品展示4*/
+.product-one > div:nth-child(4) >div:nth-child(1){
+    /*background-image: url("../img/mark_fxgrljsu_bngt.jpg");*/
+    background-size: 100% 100%;
+    width: 160px;
+    height: 160px;
+}
+
+/*商品展示5*/
+.product-one > div:nth-child(5) >div:nth-child(1){
+    /*background-image: url("../img/mark_4h84giu1(1)_3ze5.jpg");*/
+    background-size: 100% 100%;
+    width: 160px;
+    height: 160px;
+}
+
+/*商品展示6*/
+.product-one > div:nth-child(6) >div:nth-child(1){
+    /*background-image: url("../img/mark_m2oxpk3u(8)_guut.jpg");*/
+    background-size: 100% 100%;
+    width: 160px;
+    height: 160px;
+}
+
+
+
+/*页码*/
+.page{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.page > div{
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: flex-start;/*居左对齐*/
+}
+
+.page > div > div{
+    /*border: 1px solid red;*/
+    margin: 0px 7px;
+    padding: 3px;
+    font-size: 12px;
+    height: 15px;
+    line-height: 15px;
+}
+
+.page > div > div:nth-child(2){
+    color: red;
+    border: none;
+}
+
+.page > div > div:nth-child(3){
+    /*border: 1px solid black;*/
+}
+.page > div > div:nth-child(4){
+    /*border: 1px solid black;*/
+}
+.page > div > div:nth-child(5){
+    /*border: 1px solid black;*/
+}
+.page > div > div:nth-child(6){
+    /*border: 1px solid black;*/
+}
+.page > div > div:nth-child(7){
+    /*border: 1px solid black;*/
+}
+.page > div > div:nth-child(8){
+    /*border: 1px solid black;*/
+}
+
+
+
+
+
+/*
+ * 尾部
+ */
+.end{
+    /*border: 1px solid red;*/
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+.end >div{
+    /*border: 1px solid red;*/
+    width: 700px;
+    /*height: 70px;*/
+}
+
+.end >div >div{
+    /*border: 1px solid red;*/
+    color: white;
+}
+
+.end >div >div:nth-child(1){
+    display: flex;
+    justify-content: center;
+}
+
+.end >div >div:nth-child(1)>div{
+    /*border: 1px solid red;*/
+    /*width: 390px;*/
+    font-size: 5px;
+    margin-left: 5px;
+}
+
+.end >div >div:nth-child(1) > div >a{
+    text-decoration: none;
+    color: white;
+}
+
+.end >div >div:nth-child(2){
+    display: flex;
+    justify-content: center;
+}
+
+.end >div >div:nth-child(2)>div{
+    /*border: 1px solid red;*/
+    /*width: 650px;*/
+    font-size: 5px;
+    margin-left: 15px;
+}
+
+.end >div >div:nth-child(3){
+    display: flex;
+    justify-content: center;
+}
+
+.end >div >div:nth-child(3)>div{
+    /*border: 1px solid red;*/
+    width: 270px;
+    font-size: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

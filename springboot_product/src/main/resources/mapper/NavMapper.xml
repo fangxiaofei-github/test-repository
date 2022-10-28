@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxi.mapper.NavMapper">
+
+    <!--添加导航栏信息-->
+    <insert id="addNav" parameterType="com.wanxi.pojo.Nav">
+        insert into nav
+            (navName,navUrl,type,createTime,updateTime)
+        values
+            (#{navName},#{navUrl},#{type},#{createTime},#{updateTime})
+    </insert>
+
+    <!--改变导航栏信息的状态-->
+    <update id="updateNavStatus" parameterType="int">
+        update nav set status = 0 where id = #{id}
+    </update>
+
+    <!--修改导航栏信息-->
+    <update id="editNav" parameterType="com.wanxi.pojo.Nav">
+        update nav
+        set navName=#{navName}, navUrl=#{navUrl}, type=#{type}, status=#{status}, updateTime=#{updateTime} where id=#{id}
+    </update>
+
+    <!--根据查询条件和分页参数查询导航栏信息-->
+    <select id="selectByConditionAndPage" parameterType="com.wanxi.pojo.Nav" resultType="com.wanxi.pojo.Nav">
+        select * from nav
+        <where>
+            <if test=" navName != null and navName != '' ">
+                and navName = #{navName}
+            </if>
+            <if test=" type != null and type != '' ">
+                and type = #{type}
+            </if>
+            <if test=" status != null and status != '' ">
+                and status = #{status}
+            </if>
+        </where>
+        limit #{currentIndex},#{currentCount}
+    </select>
+
+    <!--查询总共有多少条记录-->
+    <select id="findNavCount" resultType="java.lang.Integer">
+        select count(*) from nav
+    </select>
+
+    <!--查询使用导航信息-->
+    <select id="findAll" resultType="com.wanxi.pojo.EsNav">
+        select * from nav
+    </select>
+
+</mapper>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>修改导航栏信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuimini/css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+    <!--隐含喻：存储id-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <input type="text" name="id"  value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">导航栏名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="navName" autocomplete="off" lay-verify="required" lay-reqtext="导航栏名称不能为空" placeholder="请输入导航栏名称" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">导航栏地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="navUrl" autocomplete="off" lay-verify="required" lay-reqtext="导航栏地址不能为空" placeholder="请输入导航栏地址" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">导航栏类型</label>
+        <div class="layui-input-block">
+            <input type="text" name="type" autocomplete="off" lay-verify="required" lay-reqtext="导航栏类型不能为空" placeholder="请输入导航栏类型 (0表头部导航栏/1表新闻中心页面的导航栏/2表产品导航栏)" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">状态</label>
+        <div class="layui-input-block">
+            <input type="text" name="status" autocomplete="off" lay-verify="required" lay-reqtext="导航栏状态不能为空" placeholder="请输入状态信息 (0表已删除/1表未删除)" value="" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</div>
+
+<script src="../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var index = layer.confirm("是否确认提交信息？", function () {
+                $.ajax({
+                    url: 'http://localhost:8888/zul/other/navInfoEdit',
+                    type: 'post',
+                    //请求头携带token
+                    headers: {
+                        "token":localStorage.getItem("token")
+                    },
+                    sync: 'true',
+                    data: JSON.stringify(data.field),
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (res) {
+                        layer.msg(res.msg, {icon:1,time:1000},function () {
+                            // 关闭弹出层
+                            layer.close(index);
+                            // 关闭新增页面
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+                            // 刷新数据表格
+                            parent.location.reload();
+                        });
+                    }
+                });
+
+            });
+
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

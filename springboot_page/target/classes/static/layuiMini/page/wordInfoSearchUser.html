@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <script src="../layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuimini/css/public.css" media="all">
+
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+
+        <!--隐藏域存储当前留言信息的的userID-->
+        <input type="hidden" id="userId" name="userId" value=""/>
+
+
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+
+    </div>
+</div>
+
+<script src="../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+
+<script>
+    layui.use(['form', 'table'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+
+
+        /**
+         * 数据表格渲染/zul/word/selectUserById
+         */
+        table.render({
+            elem: '#currentTableId',
+            url: 'http://localhost:8888/zul/word/selectUserById?userId='+sessionStorage.getItem("userId"),
+            toolbar: '#toolbarDemo',
+            //请求头携带token
+            headers: {
+                "token":localStorage.getItem("token")
+            },
+            cols: [[
+                {type: "checkbox", width: 50},
+                {field: 'id', width: 80, title: 'ID', sort: true, align: "center"},
+                {field: 'username', width: 100, title: '用户名', align: "center"},
+                {field: 'sex', width: 80, title: '性别', sort: true, align: "center"},
+                {field: 'password', width: 100, title: '用户密码', align: "center"},
+                {field: 'nickname', title: '用户昵称', width: 100, align: "center"},
+                {field: 'email', width: 100, title: '邮件', align: "center"},
+                {field: 'tel', width: 110, title: '号码', align: "center"},
+                {field: 'status', width: 80, title: '状态', align: "center"},
+                {field: 'createTime', width: 185, title: '创建时间', sort: true, align: "center",
+                        templet: "<div>{{layui.util.toDateString(d.createTime)}}</div>"},
+                {field: 'updateTime', width: 185, title: '修改时间', sort: true, align: "center",
+                        templet: "<div>{{layui.util.toDateString(d.updateTime)}}</div>"}
+            ]],
+            page: true, //默认为false即分页。如何才能不把limit和page参数传递给后端呢？
+            //当数据表格是空时，显示提示信息
+            text: {
+                none: "熔断成功！" //默认：无数据。
+            }
+        });
+
+
+
+
+    });
+</script>
+
+</body>
+</html>

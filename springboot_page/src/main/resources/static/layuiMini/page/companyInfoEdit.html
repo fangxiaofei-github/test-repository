@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>公司信息编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuimini/css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layui-form layuimini-form" lay-filter="edit">
+    <!--添加一个隐藏域来存储id。数据回显时给它赋值-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <input type="hidden" name="id"  value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">公司名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="companyName" lay-verify="required" lay-reqtext="公司名称不能为空"  placeholder="请输入公司名称" value="" class="layui-input">
+        </div>
+    </div>
+
+
+
+
+    <!--关于上传图片-->
+    <div class="layui-form-item">
+        <label class="layui-form-label required">公司logo</label>
+        <div class="layui-input-block">
+            <!--图片名称: 让它只能看不能修改 -->
+            <!--<input type="text" name="imgLogo" id="fileName" readonly autocomplete="off"  placeholder="请输入图片的名称" value="" class="layui-input">-->
+            <!--上传按钮-->
+            <button type="button" class="layui-btn" id="uploadBtn">
+                <i class="layui-icon">&#xe67c;</i>上传图片
+            </button>
+
+            <!--后端文件上传成功后传递过来的文件名赋值给这个隐藏域，一起做新增操作-->
+            <!--<input type="hidden" name="imgLogo" id="fileName" value=""/>-->
+
+            <!-- 回显图像-->
+            <div class="layui-upload-list">
+                <img class="layui-upload-img"  width="300px" height="300px" id="uploadImg" />
+                <p id="demoText"></p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">全国热线电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="hotLineTel" lay-verify="required" lay-reqtext="公司的全国热线电话不能为空"  placeholder="请输入全国热线电话" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">公司电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="phone" lay-verify="required" lay-reqtext="公司电话不能为空"  placeholder="请输入公司电话" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">公司的传真</label>
+        <div class="layui-input-block">
+            <input type="text" name="fax"  placeholder="请输入公司的传真" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">公司地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="address" lay-verify="required" lay-reqtext="公司地址不能为空"  placeholder="请输入公司地址" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">公司版权</label>
+        <div class="layui-input-block">
+            <input type="text" name="copyRight" lay-verify="required" lay-reqtext="公司版权信息不能为空"  placeholder="请输入公司版权" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">公司描述</label>
+        <div class="layui-input-block">
+            <input type="text" name="scanner"  placeholder="请输入公司描述信息" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">报名电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="applyTel"  placeholder="请输入报名电话" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">报名邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" name="applyMail"  placeholder="请输入报名邮箱" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">报名地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="applyAddress"  placeholder="请输入报名地址" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">招聘邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" name="jobMail"  placeholder="请输入招聘邮箱" value="" class="layui-input">
+        </div>
+    </div>
+
+    <!--确认按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn" id="submitOne">确认保存</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+        var upload = layui.upload;
+
+
+        /**
+         * 文件上传
+         */
+        var uploadInst = upload.render({
+            elem: '#uploadBtn'  //指向容器选择器
+            ,url: 'http://localhost:8888/zul/other/upload'
+            //,field: 'file'  // 设置文件域的的字段名。与controller中的参数名相同
+            ,accept: 'images'       //指定允许上传时校验的文件类型
+            ,acceptMime: 'image/jpg,image/jpeg,image/png'  //规定打开文件选择框时，筛选出的文件类型
+            // 请求头携带token
+            ,headers: {
+                "token":localStorage.getItem("token")
+            }
+            //,auto: false //选择文件后不自动上传
+            //,bindAction: '#submitOne' //指向一个按钮触发上传（确认保存按钮）
+
+            // 选择文件的回调
+            ,choose: function(obj){
+                //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+                obj.preview(function(index, file, result){
+                    // console.log(index); //得到文件索引
+                    // console.log(file); //得到文件对象
+                    // console.log(result); //得到文件base64编码，比如图片
+
+                    // 图片回显
+                    $("#uploadImg").attr("src",result); //图片base64
+
+                });
+            }
+
+            // 执行上传请求后的操作（上传完毕回调）
+            ,done: function(res){
+                console.log(res);
+                //如果上传失败
+                if(res.code != 0){
+                    return layer.msg('上传失败');
+                    $('#demoText').html(''); //置空上传失败的状态
+
+                }else {
+                    //上传成功的一些操作【上传成功(code=0)后端要返回来图片的路径】
+                    // 把文件上传成功传递过来的文件名存储起来，在下面按钮提交中要使用到--一起传递给后端
+                    sessionStorage.setItem("imgLogo",res.data.src);
+                    // 后端文件上传成功后传递过来的文件名赋值给这个隐藏域，一起做新增操作
+                    //$("#fileName").val(res.data.src);
+
+                }
+
+            }
+
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+
+        });
+
+
+
+
+
+        /**
+         *  监听提交按钮
+         */
+        form.on('submit(saveBtn)', function (data) {
+            console.log(data.field);
+            //若上面不使用隐藏域方式来传递后端传递过来的文件名，那就使用下面这种方式来携带文件名给后端一起添加操作
+            data.field.imgLogo = sessionStorage.getItem("imgLogo");
+
+            $.ajax({
+                url: 'http://localhost:8888/zul/other/companyInfoEdit',
+                type: 'post',
+                //请求头携带token
+                headers: {
+                    "token":localStorage.getItem("token")
+                },
+                sync: "true",
+                data: JSON.stringify(data.field),
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                success: function (res) {
+                    var index = layer.msg(res.msg, {time:1500},
+                        function () {
+
+                            // 先关闭这个信息弹出层
+                            layer.close(index);
+
+                            // 再关闭这个添加页面（这个只是关闭当前新增窗口，并没有让表格刷新）
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+
+                            // 既然这里无法做表格重载，当关闭添加页面后显示数据表格页面，干脆让这个页面重新加载一遍
+                            //重新加载父页面
+                            parent.location.reload();
+                        });
+                },
+                error: function (res) {
+                    layer.msg(res.msg,{icon:2});
+                }
+            });
+
+            //阻止表单跳转（因为我们要以json格式ajax方式提交）。如果需要表单跳转，去掉这段即可。
+            return false;
+        });
+
+
+
+    });
+</script>
+</body>
+</html>

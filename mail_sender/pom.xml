@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wanxi</groupId>
+    <artifactId>mail_sender</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--springboot父依赖-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.0</version>
+    </parent>
+
+
+    <dependencies>
+        <!-- 引入了springboot_product模块的依赖 -->
+        <!--<dependency>-->
+        <!--    <groupId>com.wanxi</groupId>-->
+        <!--    <artifactId>springboot_product</artifactId>-->
+        <!--    <version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
+
+        <!--rabbitmq启动器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!--mail启动器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <!--thymeleaf依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

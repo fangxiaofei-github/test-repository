@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxi.mapper.RoleMapper">
+
+    <!--新增角色信息-->
+    <insert id="addRole">
+        insert into t_role (name, role_key) values (#{name},#{roleKey})
+    </insert>
+
+    <!--修改角色信息-->
+    <update id="updateRole">
+        update t_role set name=#{name}, role_key=#{roleKey}, status=#{status}, del_flag=#{delFlag},
+                          create_by=#{createBy}, create_time=#{createTime}, update_by=#{updateBy},
+                          update_time=#{updateTime}, remark=#{remark}
+        where id = #{id}
+    </update>
+
+    <!--删除角色信息(逻辑删除)-->
+    <delete id="delRole">
+        delete  from t_role where id=#{roleId}
+    </delete>
+
+    <!--通过角色id查询角色信息-->
+    <select id="selectRoleById" resultType="com.wanxi.pojo.Role">
+        select * from t_role where id = #{roleId}
+    </select>
+
+
+</mapper>

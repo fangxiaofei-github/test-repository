@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wanxi.mapper.UserMapper">
+
+    <!--添加用户信息-->
+    <insert id="addUser" parameterType="com.wanxi.pojo.User">
+        insert into t_user (username,password,sex,nickname,email,tel,createTime,updateTime)
+        values (#{username},#{password},#{sex},#{nickname},#{email},#{tel},#{createTime},#{updateTime})
+    </insert>
+
+    <!--把用户的status改为0-->
+    <update id="updateUserStatus" parameterType="int">
+        update t_user set status=0 where id = #{id}
+    </update>
+
+    <!--修改用户信息-->
+    <update id="editUser" parameterType="com.wanxi.pojo.User">
+        update t_user
+        set username=#{username}, password=#{password}, nickname=#{nickname}, email=#{email}, sex=#{sex}, tel=#{tel}, status=#{status}, updateTime=#{updateTime} where id=#{id}
+    </update>
+
+
+    <!--根据查询条件和分页参数去查询信息-->
+    <select id="selectByConditionAndPage" parameterType="com.wanxi.vo.UserVO" resultType="com.wanxi.pojo.User">
+        select * from t_user
+        <where>
+            <if test="username != null and username != '' ">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="nickname != null and nickname != '' ">
+                and nickname like concat('%',#{nickname},'%')
+            </if>
+            <if test="tel != null and tel != '' ">
+                and tel = #{tel}
+            </if>
+            <if test="status != null and status != '' ">
+                and `status` = #{status}
+            </if>
+        </where>
+        limit #{currentIndex},#{currentCount}
+    </select>
+
+    <!--查询一共有多少条记录-->
+    <select id="findUserCount" resultType="java.lang.Integer">
+        select count(*) from t_user
+    </select>
+
+    <!--根据用户id查询用户信息-->
+    <select id="selectUserById" resultType="com.wanxi.pojo.User">
+        select * from t_user where id = #{userId}
+    </select>
+
+
+</mapper>

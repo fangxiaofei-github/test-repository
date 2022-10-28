@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/mail_sender/mail_sender.iml" filepath="$PROJECT_DIR$/mail_sender/mail_sender.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot_page/springboot_page.iml" filepath="$PROJECT_DIR$/springboot_page/springboot_page.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot_product/springboot_product.iml" filepath="$PROJECT_DIR$/springboot_product/springboot_product.iml" />
+    </modules>
+  </component>
+</project>

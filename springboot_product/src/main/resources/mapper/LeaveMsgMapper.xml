@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxi.mapper.LeaveMsgMapper">
+
+    <!--删除留言信息即修改留言的状态-->
+    <update id="updateStatus" parameterType="int">
+        update leave_message set status = 0 where id = #{id}
+    </update>
+
+    <!--修改留言信息-->
+    <update id="editWord" parameterType="com.wanxi.pojo.LeaveMsg">
+        update leave_message
+        set username=#{username}, email=#{email}, title=#{title}, context=#{context}, status=#{status}, updateTime=#{updateTime} where id=#{id}
+    </update>
+
+    <!--根据查询条件和分页参数去查询信息-->
+    <select id="selectByConditionAndPage" resultType="com.wanxi.pojo.LeaveMsg">
+        select * from leave_message
+        <where>
+            <if test="username != null and username != '' ">
+                and username = #{username}
+            </if>
+            <if test="title != null and title != '' ">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="context != null and context != '' ">
+                and context like concat('%',#{context},'%')
+            </if>
+            <if test="createTime != null">
+                and createTime = #{createTime}
+            </if>
+            <if test="status != null and status != '' ">
+                and status = #{status}
+            </if>
+        </where>
+        limit #{currentIndex},#{currentCount}
+    </select>
+
+    <!--查询共用多少条记录-->
+    <select id="findLeaveMsgCount" resultType="java.lang.Integer">
+        select count(*) from leave_message
+    </select>
+</mapper>

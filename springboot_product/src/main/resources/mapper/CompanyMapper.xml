@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxi.mapper.CompanyMapper">
+
+    <!--新增公司信息-->
+    <insert id="addCompany" parameterType="com.wanxi.pojo.Company">
+        insert into company
+            (companyName,imgLogo,hotLineTel,phone,fax,address,copyRight,scanner,applyTel,applyMail,applyAddress,jobMail,createTime,updateTime)
+        values
+            (#{companyName},#{imgLogo},#{hotLineTel},#{phone},#{fax},#{address},#{copyRight},#{scanner},#{applyTel},#{applyMail},#{applyAddress},#{jobMail},#{createTime},#{updateTime})
+    </insert>
+
+    <!--修改公司信息-->
+    <update id="editCompany" parameterType="com.wanxi.pojo.Company">
+        update company
+        set imgLogo = #{imgLogo}, applyMail = #{applyMail}, address = #{address}, jobMail = #{jobMail}, hotLineTel = #{hotLineTel}, phone = #{phone},
+            copyRight = #{copyRight}, companyName = #{companyName}, scanner = #{scanner}, applyTel = #{applyTel}, applyAddress = #{applyAddress}, fax = #{fax}, updateTime = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <!--单条或者多条删除操作-->
+    <delete id="delCompany" parameterType="int">
+        delete from company where id = #{id}
+    </delete>
+
+    <!--根据查询参数和分页条件查询公司信息-->
+    <select id="selectCompanyByLimit" parameterType="com.wanxi.vo.CompanyVO" resultType="com.wanxi.pojo.Company">
+        select * from company
+        <where>
+            <if test="companyName != null and companyName != '' ">
+                and companyName = #{companyName}
+            </if>
+            <if test="address != null and address != '' ">
+                and address = #{address}
+            </if>
+            <if test="hotLineTel != null and hotLineTel != '' ">
+                and hotLineTel = #{hotLineTel}
+            </if>
+        </where>
+        limit #{currentIndex},#{currentCount}
+    </select>
+
+    <!--查询表中一共有多少条数据-->
+    <select id="findCompanyCount" resultType="java.lang.Integer">
+        select count(*) from company
+    </select>
+</mapper>

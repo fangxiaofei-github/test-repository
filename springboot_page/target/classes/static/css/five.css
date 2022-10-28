@@ -1,0 +1,379 @@
+
+
+.body{
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: center;  /*左右布局---居中对齐*/
+}
+
+
+
+/*
+ * 头部
+ */
+
+.top{
+    /*border: 1px solid red;*/
+    width: 1300px;
+    display: flex;
+    justify-content: center;  /*左右布局---居中对齐*/
+}
+
+
+/*头部居中*/
+.top > div{
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: space-between;/*两端对齐*/
+    width: 1000px;
+}
+
+.top > div > div{
+    /*border: 1px solid red;*/
+}
+
+/*头部第一个框*/
+.top > div > div:nth-child(1){
+    /*background-image: url("../img/logo_cu9u.png");*/
+    /*background-size: 100% 100%;*/
+    /*width: 200px;*/
+    /*height: 35px;*/
+}
+
+/*头部第二个框*/
+.top > div > div:nth-child(2){
+    display: flex;
+    justify-content: center;  /*左右布局---居中对齐*/
+}
+
+.top > div > div:nth-child(2) > div> a{
+    text-decoration: none;
+    color: #A55500;
+}
+
+.top > div > div:nth-child(2) > div{
+    /*border: 1px solid green;*/
+    font-size: 13px;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 20px;
+}
+
+.top > div > div:nth-child(2) > div:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.top > div > div:nth-child(2) > div:nth-child(5){
+    color: red;
+    font-weight: bold;
+}
+
+/*头部第三个框*/
+.top > div > div:nth-child(3){
+    font-size: 13px;
+    height: 35px;
+    line-height: 35px;
+}
+
+
+
+
+/*
+ * 中部
+ */
+.middle{
+    /*border: 1px solid green;*/
+}
+
+.middle > div{
+    /*border: 1px solid red;*/
+}
+
+.middle > div:nth-child(1){
+    background-image: url("../img/banner_g6ii.jpg");
+    background-size: 100% 100%;
+    width: 1300px;
+    height: calc(1300px*650/1920);
+    display: flex;
+    justify-content: center;  /*左右布局---居中对齐*/
+    align-items: center;/*上下居中*/
+}
+
+.middle > div:nth-child(1) > div{
+    /*border: 1px solid green;*/
+    width: 1000px;
+    /*height: 250px;*/
+    display: flex;
+    align-items: center;/*上下居中*/
+}
+
+.middle > div:nth-child(1) > div > div{
+    /*border: 1px solid red;*/
+    width: 500px;
+    /*height: 210px;*/
+}
+
+.middle > div:nth-child(1) > div > div >div{
+    /*border: 1px solid fuchsia;*/
+}
+
+.middle > div:nth-child(1) > div > div >div >div{
+    /*border: 1px solid red;*/
+    text-align: right;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(1){
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    color: rgb(170, 170, 170);
+    line-height: 140%;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(2){
+    font-size: 24px;
+    font-family: Microsoft YaHei;
+    color: rgb(51, 51, 51);
+    line-height: 140%;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(3){
+    font-size: 36px;
+    font-family: Microsoft YaHei;
+    color: rgb(246, 190, 35);
+    line-height: 140%;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(4){
+    font-size: 13px;
+    font-family: Microsoft YaHei;
+    color: rgb(136, 136, 136);
+    line-height: 140%;
+}
+
+.middle > div:nth-child(1) > div > div >div:nth-child(1) >div:nth-child(5){
+    font-size: 13px;
+    font-family: Microsoft YaHei;
+    color: rgb(136, 136, 136);
+    line-height: 140%;
+}
+
+.middle-a{
+    margin-top: 18px;
+    display: flex;
+    justify-content: flex-end;/*居右对齐*/
+}
+
+.middle-a > div > a{
+    display: block;
+    text-decoration: none;
+    width: 145px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 5px 5px 5px 5px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0px;
+    background-color: rgba(246,190,35,1);
+}
+
+.middle-a > div > a > span{
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
+}
+
+
+
+/*第二个框*/
+.middle-two{
+    display: flex;
+    justify-content: center;
+}
+
+.middle-two > div{
+    /*border: 1px solid red;*/
+    width: 1000px;
+    /*height: 500px;*/
+    margin: 25px 0px;
+}
+
+.middle-two > div >div{
+    /*border: 1px solid red;*/
+}
+
+.middle-two > div >div:nth-child(1)>div{
+    /*border: 1px solid black;*/
+}
+
+.middle-two > div >div:nth-child(1){
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.middle-two > div >div:nth-child(1)>div:nth-child(1){
+    background-image: url("../img/bt_bg_dby3.jpg");
+    background-size: 100% 100%;
+    width: 4px;
+    height: 17px;
+}
+
+.middle-two > div >div:nth-child(1)>div:nth-child(2)>span:nth-child(1){
+    font-size: 17px;
+    font-family: Microsoft YaHei;
+    color: rgb(0, 0, 0);
+}
+
+.middle-two > div >div:nth-child(1)>div:nth-child(2)>span:nth-child(2){
+    font-size: 10px;
+    font-family: Microsoft YaHei;
+    color: #aaaaaa;
+}
+
+.middle-two > div >div:nth-child(1)>div:nth-child(2){
+    padding: 0px 8px;
+}
+
+
+.middle-in{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 30px;
+}
+
+.middle-in > div{
+    /*border: 1px solid red;*/
+}
+
+.middle-form >div>span{
+    font-size: 14px;
+    color: #787878;
+}
+
+.middle-form >div>input{
+    width: 500px;
+    height: 25px;
+    background-color: #EEEEEE;
+    border: none;
+}
+
+.middle-form > div>textarea{
+    width: 500px;
+    height: 100px;
+    background-color: #EEEEEE;
+    border: none;
+}
+
+.middle-form  >div:nth-child(5){
+    margin-top: 20px;
+}
+
+#formSubmit{
+    width: 100px;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+.middle-in >div:nth-child(2){
+    display: flex;
+    align-items: center;
+}
+
+
+.middle-in >div:nth-child(2)>div{
+    /*border: 1px solid red;*/
+    margin-left: 40px;
+}
+
+.middle-in >div:nth-child(2)>div >p{
+    /*border: 1px solid red;*/
+}
+
+.middle-in >div:nth-child(2)>div >p:nth-child(1){
+    font-size: 20px;
+    line-height: 90%;
+}
+
+.middle-in >div:nth-child(2)>div >p:nth-child(2){
+    font-size: 15px;
+    color: #685B65;
+    line-height: 30px;
+}
+
+
+
+/*
+ * 尾部
+ */
+.end{
+    /*border: 1px solid red;*/
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+.end >div{
+    /*border: 1px solid red;*/
+    width: 700px;
+    /*height: 70px;*/
+}
+
+.end >div >div{
+    /*border: 1px solid red;*/
+    color: white;
+}
+
+.end >div >div:nth-child(1){
+    display: flex;
+    justify-content: center;
+}
+
+.end >div >div:nth-child(1)>div{
+    /*border: 1px solid red;*/
+    /*width: 390px;*/
+    font-size: 5px;
+    margin-left: 5px;
+}
+
+.end >div >div:nth-child(1) > div >a{
+    text-decoration: none;
+    color: white;
+}
+
+.end >div >div:nth-child(2){
+    display: flex;
+    justify-content: center;
+}
+
+.end >div >div:nth-child(2)>div{
+    /*border: 1px solid red;*/
+    /*width: 650px;*/
+    font-size: 5px;
+    margin-left: 15px;
+}
+
+.end >div >div:nth-child(3){
+    display: flex;
+    justify-content: center;
+}
+
+.end >div >div:nth-child(3)>div{
+    /*border: 1px solid red;*/
+    width: 270px;
+    font-size: 5px;
+}
+
+
+
+
+
+
+
+

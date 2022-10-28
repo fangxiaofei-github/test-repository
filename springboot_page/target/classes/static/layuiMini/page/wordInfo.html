@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>留言信息管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuimini/css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">投诉姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">投诉主题</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="title" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">投诉内容</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="context" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">投诉时间</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="createTime" id="time_demo" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">投诉状态</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="status" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <!--<button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>-->
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            <!--根据留言信息的ID去查询处理用户的信息-->
+            <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="selectUser">查询处理留言的用户信息</a>
+        </script>
+
+    </div>
+</div>
+
+<script src="../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+
+<script>
+    layui.use(['form', 'table','laydate'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+        var laydate = layui.laydate;
+
+        /**
+         * 渲染数据表格
+         */
+        table.render({
+            elem: '#currentTableId',
+            url: 'http://localhost:8888/zul/word/wordInfo',
+            toolbar: '#toolbarDemo',
+            //请求头携带token
+            headers: {
+                "token":localStorage.getItem("token")
+            },
+            defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            cols: [[
+                {type: "checkbox", width: 50},
+                {field: 'id', width: 80, title: 'ID', sort: true, align: "center"},
+                {field: 'username', width: 130, title: '用户名', align: "center"},
+                {field: 'email', width: 150, title: '电子邮件', align: "center"},
+                {field: 'title', width: 100, title: '投诉主题', align: "center"},
+                {field: 'context', title: '投诉内容', width: 200, align: "center"},
+                {field: 'status', width: 80, title: '状态', align: "center"},
+                {field: 'userId', width: 80, title: '用户ID', sort: true, align: "center"},
+                {field: 'createTime', width: 185, title: '创建时间', sort: true, align: "center",
+                         templet: "<div>{{layui.util.toDateString(d.createTime)}}</div>"},
+                {field: 'updateTime', width: 185, title: '修改时间', sort: true, align: "center",
+                         templet: "<div>{{layui.util.toDateString(d.updateTime)}}</div>"},
+                {title: '操作', width:310, toolbar: '#currentTableBar'}
+            ]],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 10,
+            page: true
+        });
+
+
+        // 监听搜索操作 【form.on()表示表单提交时的方法】
+        form.on('submit(data-search-btn)', function (data) {
+            //执行搜索重载
+            table.reload('currentTableId', {
+                page: {curr: 1},
+                where: data.field
+            }, 'data');
+
+            return false;
+        });
+
+
+        // 给查询条件绑定一个时间
+        laydate.render({
+            elem: '#time_demo',
+            type: 'datetime'
+        });
+
+
+
+
+        /**
+         * toolbar监听事件（头部工具栏事件）
+         */
+        table.on('toolbar(currentTableFilter)', function (obj) {
+            if (obj.event === 'delete') {  // 监听删除操作
+                var checkStatus = table.checkStatus('currentTableId');
+                var data = checkStatus.data;
+                // 判断是否选中数据
+                if (data.length == 0){
+                    layer.msg("请选中你要操作的数据！", {time:1000});
+                }else {
+                    // 拼接id值
+                    var ids = '';
+                    for (var i = 0; i < data.length; i++) {
+                        ids = ids + data[i].id + ",";
+                    }
+                    // 发送异步请求
+                    $.ajax({
+                        url: 'http://localhost:8888/zul/word/wordInfoDel?ids='+ids,
+                        type: 'get',
+                        //请求头携带token
+                        headers: {
+                            "token":localStorage.getItem("token")
+                        },
+                        sync: 'true',
+                        success: function (res) {
+                            layer.msg(res.msg, {time:1000}, function () {
+                                // 刷新数据表格
+                                location.reload();
+                            });
+
+                        }
+                    })
+                }
+            }
+        });
+
+        //监听表格复选框选择
+        table.on('checkbox(currentTableFilter)', function (obj) {
+            console.log(obj)
+        });
+
+
+        /**
+         * 行工具栏事件
+         */
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') {
+
+                var index = layer.open({
+                    title: '编辑留言信息',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: 'wordInfoEdit.html',
+                    // 数据回显
+                    success: function (layero, index) {
+                        // 获取子窗口的body元素
+                        var body = layer.getChildFrame('body',index);
+                        // 给子窗口中元素赋值
+                        body.find('input[name=id]').val(data.id);
+                        body.find('input[name=username]').val(data.username);
+                        body.find('input[name=email]').val(data.email);
+                        body.find('input[name=title]').val(data.title);
+                        body.find('textarea[name=context]').val(data.context);
+                        body.find('input[name=status]').val(data.status);
+                    }
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                return false;
+
+            }else if(obj.event === 'delete') {
+                layer.confirm('你确定删除吗？', function (index) {
+                    $.ajax({
+                        url: 'http://localhost:8888/zul/word/wordInfoDel?ids='+data.id,
+                        type: 'get',
+                        //请求头携带token
+                        headers: {
+                            "token":localStorage.getItem("token")
+                        },
+                        sync: 'true',
+                        success: function (res) {
+                           layer.msg(res.msg, {time:1000}, function () {
+                               layer.close(index);
+                               location.reload();
+                           })
+                        }
+                    });
+
+                });
+            }else if (obj.event ==="selectUser"){ //根据留言信息的ID去查询处理用户的信息
+                var index = layer.open({
+                    title: '查询处理当前留言信息的用户信息',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: 'wordInfoSearchUser.html',
+                    // 数据回显
+                    success: function (layero, index) {
+                        //把用户id存储到本地
+                        sessionStorage.setItem("userId",data.userId);
+
+                        // 获取子窗口的body元素
+                        var body = layer.getChildFrame('body',index);
+                        // 给子窗口中元素赋值
+                        body.find('input[name=userId]').val(data.userId);
+
+                    }
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                return false;
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

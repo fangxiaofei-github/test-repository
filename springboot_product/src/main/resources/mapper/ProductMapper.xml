@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxi.mapper.ProductMapper">
+
+    <!--添加产品信息-->
+    <insert id="addProduct" parameterType="com.wanxi.pojo.Product">
+        insert into product
+            ( productName,productImg,price,createTime,updateTime,`describe` )
+        values
+            ( #{productName},#{productImg},#{price},#{createTime},#{updateTime},#{describe} )
+    </insert>
+
+    <!--根据id去修改status值-->
+    <update id="updateProductStatus" parameterType="int">
+        update product set status = 0 where id = #{id}
+    </update>
+
+    <!--修改产品信息-->
+    <update id="editProduct" parameterType="com.wanxi.pojo.Product">
+        update product
+        set productName=#{productName}, productImg=#{productImg}, price=#{price}, updateTime=#{updateTime}, status=#{status}, describe=#{describe}
+        where id=#{id}
+    </update>
+
+    <!--根据查询条件和分页参数查询信息-->
+    <select id="selectByConditionAndPage" parameterType="com.wanxi.vo.ProductVO" resultType="com.wanxi.pojo.Product">
+        select * from product
+        <where>
+            <if test="productName != null and productName != '' ">
+                and productName = #{productName}
+            </if>
+            <if test="price_min != null and price_min != '' ">
+                and price <![CDATA[ >= ]]> #{price_min}
+            </if>
+            <if test="price_max != null and price_max != '' ">
+                and price <![CDATA[ <= ]]> #{price_max}
+            </if>
+            <if test="price_min != null and price_min != '' and price_max != null and price_max != '' ">
+                and price between #{price_min} and #{price_max}
+            </if>
+            <if test="status != null and status != '' ">
+                and status = #{status}
+            </if>
+        </where>
+        limit #{currentIndex},#{currentCount}
+    </select>
+
+    <!--查询一共有多少条记录-->
+    <select id="findProductCount" resultType="java.lang.Integer">
+        select count(*) from product
+    </select>
+
+    <!--根据产品id查询产品信息-->
+    <select id="findProductById" resultType="com.wanxi.pojo.Product">
+        select * from product where id = #{id}
+    </select>
+
+
+
+</mapper>

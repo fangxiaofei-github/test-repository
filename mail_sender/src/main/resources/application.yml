@@ -1,0 +1,36 @@
+
+server:
+  port: 8888
+
+
+
+#邮箱相关的参数配置
+spring:
+  # 邮件配置
+  mail:
+    # 邮件服务器地址【这里我写的是QQ,若是163--smtp.163.com】
+    host: smtp.qq.com
+    # 协议
+    protocol: smtp
+    # 编码格式
+    default-encoding: utf-8
+    # 发送者的授权码（在邮箱开通服务时获取）
+    password: fnnqdqrwmdvzbcjj
+    # 发送者邮箱地址
+    username: 823679538@qq.com
+    # 端口（不同邮箱端口号不同,这里qq邮箱是587）
+    port: 587
+
+  #thymeleaf
+  thymeleaf:
+    prefix: classpath:/templates/  #prefix指定模板所在的目录
+    suffix: .html
+
+  #RabbitMQ相关的配置
+  rabbitmq:
+    host: 192.168.78.128
+    port: 5672
+    username: fxf
+    password: fxf
+    virtual-host: /vm2  #不写默认为/
+

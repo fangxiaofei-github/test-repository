@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>添加商品信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../layuimini/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuimini/css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">商品名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="productName" autocomplete="off" lay-verify="required" lay-reqtext="商品名称不能为空" placeholder="请输入商品名称" value="" class="layui-input">
+        </div>
+    </div>
+
+
+
+    <!--关于上传图片-->
+    <div class="layui-form-item">
+        <label class="layui-form-label required">商品图片</label>
+        <div class="layui-input-block">
+            <!--图片名称: 让它只能看不能修改 -->
+            <!--<input type="text" name="productImg" autocomplete="off" lay-verify="required" lay-reqtext="商品图片不能为空" placeholder="请输入商品图片" value="" class="layui-input">-->
+            <!--上传按钮-->
+            <button type="button" class="layui-btn" id="uploadBtn">
+                <i class="layui-icon">&#xe67c;</i>上传图片
+            </button>
+
+            <!--后端文件上传成功后传递过来的文件名赋值给这个隐藏域，一起做新增操作-->
+            <!--<input type="hidden" name="productImg" id="fileName" value=""/>-->
+
+            <!-- 回显图像-->
+            <div class="layui-upload-list">
+                <img class="layui-upload-img"  width="300px" height="300px" id="uploadImg" />
+                <p id="demoText"></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">商品价格</label>
+        <div class="layui-input-block">
+            <input type="text" name="price" autocomplete="off" lay-verify="required" lay-reqtext="商品价格不能为空" placeholder="请输入商品价格" value="" class="layui-input">
+        </div>
+    </div>
+
+    <!--用富文本编辑器-->
+    <div class="layui-form-item">
+        <label class="layui-form-label required">商品描述</label>
+        <div class="layui-input-block">
+            <!--<input type="text" name="describe" autocomplete="off" lay-verify="required" lay-reqtext="商品描述不能为空" placeholder="请输入商品描述信息" value="" class="layui-input">-->
+            <textarea id="fwb" name="describe" style="display: none;"></textarea>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" id="submitOne" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</div>
+
+<script src="../layuimini/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+
+<script>
+    layui.use(['form','layedit'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+        var upload = layui.upload;
+        var layedit = layui.layedit;
+
+
+        /**
+         * 富文本相关的操作
+         */
+        //插入图片接口【layedit.set一定要放在build前面】
+        layedit.set({
+            uploadImage: {
+                url: 'http://localhost:8888/zul/other/upload',
+                type: 'post', //默认post
+                //请求头携带token
+                headers: {
+                    "token":localStorage.getItem("token")
+                }
+            }
+        });
+        //建立编辑器
+        var editIndex = layedit.build('fwb');
+
+
+
+
+
+        /**
+         * 文件上传
+         */
+        var uploadInst = upload.render({
+            elem: '#uploadBtn'  //指向容器选择器
+            ,url: 'http://localhost:8888/zul/other/upload'
+            //,field: 'file'  // 设置文件域的的字段名。与controller中的参数名相同
+            ,accept: 'images'       //指定允许上传时校验的文件类型
+            ,acceptMime: 'image/jpg,image/jpeg,image/png'  //规定打开文件选择框时，筛选出的文件类型
+            //,auto: false //选择文件后不自动上传
+            //,bindAction: '#submitOne' //指向一个按钮触发上传（确认保存按钮）
+            //请求头携带token
+            ,headers: {
+                "token":localStorage.getItem("token")
+            }
+
+            // 选择文件的回调
+            ,choose: function(obj){
+                //预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)
+                obj.preview(function(index, file, result){
+                    // console.log(index); //得到文件索引
+                    // console.log(file); //得到文件对象
+                    // console.log(result); //得到文件base64编码，比如图片
+
+
+                    // 图片回显
+                    $("#uploadImg").attr("src",result); //图片base64
+
+                });
+            }
+
+            // 执行上传请求后的操作（上传完毕回调）
+            ,done: function(res){
+                console.log(res);
+                //如果上传失败
+                if(res.code != 0){
+                    return layer.msg('上传失败');
+                    $('#demoText').html(''); //置空上传失败的状态
+
+                }else {
+                    //上传成功的一些操作【上传成功(code=0)后端要返回来图片的路径】
+                    // 把文件上传成功传递过来的文件名存储起来，在下面按钮提交中要使用到--一起传递给后端
+                    sessionStorage.setItem("productImg",res.data.src);
+                    // 后端文件上传成功后传递过来的文件名赋值给这个隐藏域，一起做新增操作
+                    //$("#fileName").val(res.data.src);
+
+                }
+
+            }
+
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+
+        });
+
+
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+
+            //若上面不使用隐藏域方式来传递后端传递过来的文件名，那就使用下面这种方式来携带文件名给后端一起添加操作
+            data.field.productImg = sessionStorage.getItem("productImg");
+            //还有描述信息(富文本编辑器)的内容，也要一起给后端，一起添加操作
+            data.field.describe = layedit.getContent(editIndex);
+
+            var index = layer.confirm("是否确认提交信息？", function () {
+                $.ajax({
+                    url: 'http://localhost:8888/zul/other/productInfoAdd',
+                    type: 'post',
+                    //请求头携带token
+                    headers: {
+                        "token":localStorage.getItem("token")
+                    },
+                    sync: 'true',
+                    data: JSON.stringify(data.field),
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (res) {
+                        layer.msg(res.msg, {icon:1,time:1000},function () {
+                            // 关闭弹出层
+                            layer.close(index);
+                            // 关闭新增页面
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+                            // 刷新数据表格
+                            parent.location.reload();
+                        });
+                    }
+                });
+
+            });
+
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

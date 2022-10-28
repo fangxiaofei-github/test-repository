@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxi.mapper.MenuMapper">
+
+    <!--新增权限信息-->
+    <insert id="addMenu" parameterType="com.wanxi.pojo.Menu">
+        insert into t_menu (menu_name,perms) values (#{menuName},#{perms})
+    </insert>
+
+    <!--修改某条权限信息的状态-->
+    <update id="updateStatus" parameterType="int">
+        update t_menu set del_flag = 1 where id = #{id}
+    </update>
+
+    <!--修改权限信息-->
+    <update id="updateMenu" parameterType="com.wanxi.pojo.Menu">
+        update
+            t_menu
+        set
+            menu_name=#{menuName},path=#{path},component=#{component},visible=#{visible},status=#{status},
+            perms=#{perms},icon=#{icon},create_by=#{createBy},create_time=#{createTime},update_by=#{updateBy},
+            update_time=#{updateTime},del_flag=#{delFlag},remark=#{remark}
+        where
+            id=#{id}
+    </update>
+
+    <!--查询所有权限信息-->
+    <select id="selectAll" resultType="com.wanxi.pojo.Menu">
+        select * from t_menu
+    </select>
+</mapper>

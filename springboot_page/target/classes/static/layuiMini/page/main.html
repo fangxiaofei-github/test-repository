@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<!--
+    管理员：首页信息的页面
+ -->
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <script src="../layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+
+    <style type="text/css">
+        .body{
+            display: flex;
+            justify-content: center;  /*左右布局---居中对齐*/
+        }
+        .title_warning{
+            font-size: 46px;
+            margin-top: 200px;
+        }
+    </style>
+
+</head>
+
+<body class="body">
+
+
+    <div class="title_warning">欢迎<span id="user_name"></span>来到“户外用品的后台管理系统”！</div>
+
+<script>
+    // window.onload = function () {
+    //     $.ajax({
+    //         url: '/product-jsp/userInfo',
+    //         type: 'post',
+    //         sync: 'true',
+    //         dataType: "json", //默认值为string。表示预期的服务器响应的数据类型。
+    //         success: function (data) {
+    //             //获取别名
+    //             var nickname = data.data.nickname;
+    //             //填充
+    //             $("#user_name").html(nickname);
+    //         }
+    //     })
+    //
+    // }
+</script>
+
+</body>
+
+</html>

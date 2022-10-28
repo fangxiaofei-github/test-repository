@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxi.mapper.CompanyNewMapper">
+
+    <!--添加公司新闻信息-->
+    <insert id="addCompanyNew" parameterType="com.wanxi.pojo.CompanyNew">
+        insert into companynew
+            (title,context,newTime,type,createTime,updateTime)
+        values
+            (#{title},#{context},#{newTime},#{type},#{createTime},#{updateTime})
+    </insert>
+
+    <!--改变该条记录的状态-->
+    <update id="updateCompanyNewStatus" parameterType="int">
+        update companynew set status = 0 where id = #{id}
+    </update>
+
+    <!--修改新闻信息-->
+    <update id="editCompanyNew" parameterType="com.wanxi.pojo.CompanyNew">
+        update companynew
+        set title=#{title}, context=#{context}, newTime=#{newTime}, type=#{type}, status=#{status}, updateTime=#{updateTime} where id=#{id}
+    </update>
+
+    <!--根据参数和分页条件查询信息-->
+    <select id="selectByConditionAndPage" parameterType="com.wanxi.pojo.CompanyNew" resultType="com.wanxi.pojo.CompanyNew">
+        select * from companynew
+        <where>
+            <if test="title != null and title != '' ">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="newTime != null ">
+                and date_format(newTime,'%Y-%m-%d') = #{newTime}
+            </if>
+            <if test="type != null and type != '' ">
+                and type = #{type}
+            </if>
+        </where>
+        limit #{currentIndex},#{currentCount}
+    </select>
+
+    <!--查询表中总共有几条数据-->
+    <select id="findCompanyNewCount" resultType="java.lang.Integer">
+        select count(*) from companynew
+    </select>
+</mapper>
